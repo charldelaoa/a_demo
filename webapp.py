@@ -20,14 +20,6 @@ options = st.sidebar.multiselect(
 
 st.sidebar.write('You selected:', options)
 
-if agree:
-    st.write('Great!')
-
-if st.button('Say hello'):
-    st.write('Why hello there')
-else:
-    st.write('Goodbye')
-
 
 numeric = st.sidebar.number_input("numerical input", 1, 4, 1, 1)
 st.sidebar.write(f"Numeric input modified {numeric}")
@@ -35,7 +27,7 @@ st.sidebar.write(f"Numeric input modified {numeric}")
 def plot_equation(mu, sigma, n):
     x = np.linspace(-5, 5, 1000)
     y = np.exp(-((x-mu)/sigma)**n)
-    p = figure(title="Super-Gaussian", x_axis_label='x', y_axis_label='y')
+    p = figure(title="Super-Gaussian", x_axis_label='x', y_axis_label='y', width = 300, height= 300)
     p.line(x, y, line_width=2)
     st.bokeh_chart(p)
 
@@ -45,9 +37,17 @@ st.title("Super-Gaussian Equation Plotter")
 
 plot_equation(mu, sigma, n)
 
-st.title("This is a title")
-#st.markdown("This add markdown based text")
+#####
+st.title("This is a dataframe")
+df = pd.DataFrame(
+   np.random.randn(50, 20),
+   columns=('col %d' % i for i in range(20)))
+st.dataframe(df)  # Same as st.write(df)
 
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['a', 'b', 'c'])
 
+st.line_chart(chart_data)
 
 
