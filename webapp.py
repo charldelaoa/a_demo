@@ -9,6 +9,26 @@ mu = st.sidebar.slider("Mean", -5.0, 5.0, 0.0, 0.1)
 sigma = st.sidebar.slider("Standard Deviation", 0.1, 5.0, 1.0, 0.1)
 n = st.sidebar.slider("Order", 2, 10, 2, 1)
 
+st.sidebar.markdown("This is a checkbox")
+agree = st.sidebar.checkbox('I agree')
+
+st.sidebar.markdown("Multiselect")
+options = st.sidebar.multiselect(
+    'What are your favorite colors',
+    ['Green', 'Yellow', 'Red', 'Blue'],
+    ['Yellow', 'Red'])
+
+st.sidebar.write('You selected:', options)
+
+if agree:
+    st.write('Great!')
+
+if st.button('Say hello'):
+    st.write('Why hello there')
+else:
+    st.write('Goodbye')
+
+
 numeric = st.sidebar.number_input("numerical input", 1, 4, 1, 1)
 st.sidebar.write(f"Numeric input modified {numeric}")
 # Create a function to plot the equation
@@ -29,9 +49,5 @@ st.title("This is a title")
 #st.markdown("This add markdown based text")
 
 
-df = pd.DataFrame(
-   np.random.randn(50, 20),
-   columns=('col %d' % i for i in range(20)))
 
-st.dataframe(df)  # Same as st.write(df)
 
