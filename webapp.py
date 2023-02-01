@@ -3,7 +3,7 @@ from bokeh.plotting import figure, show
 import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
-from bokeh.plotting import figure, show
+
 
 st.set_page_config(page_title="Super-Gaussian Equation Plotter", layout="wide")
 # Define the default values for the variables
