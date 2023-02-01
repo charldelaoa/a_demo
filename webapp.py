@@ -1,5 +1,5 @@
 import streamlit as st
-from bokeh.plotting import figure, show
+from bokeh.plotting import figure
 import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
