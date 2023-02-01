@@ -2,6 +2,8 @@ import streamlit as st
 from bokeh.plotting import figure, show
 import numpy as np
 import pandas as pd
+import plotly.figure_factory as ff
+from bokeh.plotting import figure, show
 
 st.set_page_config(page_title="Super-Gaussian Equation Plotter", layout="wide")
 # Define the default values for the variables
@@ -48,6 +50,64 @@ chart_data = pd.DataFrame(
     np.random.randn(20, 3),
     columns=['a', 'b', 'c'])
 
+st.title("Generate interactive HTML plots")
 st.line_chart(chart_data)
 
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['a', 'b', 'c'])
 
+st.area_chart(chart_data)
+
+x1 = np.random.randn(200) - 2
+x2 = np.random.randn(200)
+x3 = np.random.randn(200) + 2
+
+# Group data together
+hist_data = [x1, x2, x3]
+
+group_labels = ['Group 1', 'Group 2', 'Group 3']
+
+# Create distplot with custom bin_size
+fig = ff.create_distplot(
+        hist_data, group_labels, bin_size=[.1, .25, .5])
+
+# Plot!
+st.plotly_chart(fig, use_container_width=True)
+
+
+
+N = 4000
+x = np.random.random(size=N) * 100
+y = np.random.random(size=N) * 100
+radii = np.random.random(size=N) * 1.5
+colors = np.array([ [r, g, 150] for r, g in zip(50 + 2*x, 30 + 2*y) ], dtype="uint8")
+
+TOOLS="hover,crosshair,pan,wheel_zoom,zoom_in,zoom_out,box_zoom,undo,redo,reset,tap,save,box_select,poly_select,lasso_select"
+
+p = figure(tools=TOOLS)
+
+p.scatter(x, y, radius=radii,
+          fill_color=colors, fill_alpha=0.6,
+          line_color=None)
+
+st.bokeh_chart(p)
+
+from pyecharts import options as opts
+from pyecharts.charts import Bar
+from streamlit_echarts import st_pyecharts
+
+b = (
+    Bar()
+    .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracle", "Google", "Alibaba"])
+    .add_yaxis(
+        "2017-2018 Revenue in (billion $)", [21.2, 20.4, 10.3, 6.08, 4, 2.2]
+    )
+    .set_global_opts(
+        title_opts=opts.TitleOpts(
+            title="Top cloud providers 2018", subtitle="2017-2018 Revenue"
+        ),
+        toolbox_opts=opts.ToolboxOpts(),
+    )
+)
+st_pyecharts(b)
