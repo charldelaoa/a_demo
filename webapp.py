@@ -6,7 +6,10 @@ import plotly.figure_factory as ff
 from bokeh.plotting import figure, show
 
 st.set_page_config(page_title="Super-Gaussian Equation Plotter", layout="wide")
+
+# 1. Add sliders and input variables
 # Define the default values for the variables
+
 mu = st.sidebar.slider("Mean", -5.0, 5.0, 0.0, 0.1)
 sigma = st.sidebar.slider("Standard Deviation", 0.1, 5.0, 1.0, 0.1)
 n = st.sidebar.slider("Order", 2, 10, 2, 1)
@@ -21,7 +24,6 @@ options = st.sidebar.multiselect(
     ['Yellow', 'Red'])
 
 st.sidebar.write('You selected:', options)
-
 
 numeric = st.sidebar.number_input("numerical input", 1, 4, 1, 1)
 st.sidebar.write(f"Numeric input modified {numeric}")
