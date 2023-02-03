@@ -95,3 +95,4 @@ p.scatter(x, y, radius=radii,
 
 st.bokeh_chart(p)
 
+print('Test')
